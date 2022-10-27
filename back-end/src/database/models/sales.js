@@ -1,0 +1,44 @@
+const SalesModel = (sequelize, DataTypes) => {
+  const sales = sequelize.define('sales', {
+    id: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    userId: {
+      allowNull: false,
+      foreignKey: true,
+      type: DataTypes.INTEGER,
+    },
+    sellerId: {
+      allowNull: false,
+      foreignKey: true,
+      type: DataTypes.INTEGER,
+    },
+    totalPrice: DataTypes.DECIMAL(9,2),
+    deliveryAddress: DataTypes.STRING,
+    deliveryNumber: DataTypes.STRING,
+    saleDate: DataTypes.DATE,
+    status: DataTypes.STRING
+  }, 
+  {
+    timestamps: false,
+    tableName: 'sales',
+    undescored: false
+  });
+
+  sales.associate = (models) => {
+    models.users.belongsTo(models.users,
+      { foreignKey: 'userId' })
+  }
+
+  sales.associate = (models) => {
+    models.sales.hasMany(models.salesProducts,
+      { foreignKey: 'saleId' })
+  }
+
+  return sales;
+};
+
+module.exports = SalesModel;
