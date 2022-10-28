@@ -20,10 +20,12 @@ const ProductsModel = (sequelize, DataTypes) => {
 
   products.associate = (models) => {
     products.hasMany(models.salesProducts,
-      { foreignKey: 'productId' })
+      { foreignKey: 'productId',
+        as: 'product',
+     })
   }
 
   return products;
 };
 
-module.exports = ProductsModel;
+module.exports = ProductsModel; 
