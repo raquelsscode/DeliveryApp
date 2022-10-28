@@ -1,4 +1,5 @@
 import React from 'react';
+import { string, func } from 'prop-types';
 
 export default function Button(
   {
@@ -6,7 +7,7 @@ export default function Button(
     dataTestId,
     onClick,
     // isDisabled,
-  }
+  },
 ) {
   return (
     <button
@@ -16,6 +17,12 @@ export default function Button(
       // disabled={ !loginIsValid() }
     >
       { textButton }
-    </button>  
+    </button>
   );
 }
+
+Button.propTypes = {
+  textButton: string.isRequired,
+  dataTestId: string.isRequired,
+  onClick: func.isRequired,
+};

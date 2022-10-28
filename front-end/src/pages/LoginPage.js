@@ -27,7 +27,7 @@ function LoginPage() {
         label="Senhas"
       />
 
-      <Button 
+      <Button
         textButton="Login"
         dataTestId="button"
       />
