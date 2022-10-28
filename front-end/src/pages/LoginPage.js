@@ -29,11 +29,11 @@ function LoginPage() {
 
       <Button
         textButton="Login"
-        dataTestId="button"
+        dataTestId="common_login__button-login"
       />
       <Button
         textButton="Ainda não tenho conta"
-        dataTestId="button"
+        dataTestId="common_login__button-register"
       />
     </div>
   );
