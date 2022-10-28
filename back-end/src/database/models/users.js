@@ -11,13 +11,11 @@ const UserModel = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     role: DataTypes.STRING
   },
-  {
-    
-      timestamps: false,
-      tableName: 'users',
-      undescored: false
-  }
-  );
+  {    
+    timestamps: false,
+    tableName: 'users',
+    undescored: false
+  });
 
   users.associate = (models) => {
     users.hasMany(models.sales,
