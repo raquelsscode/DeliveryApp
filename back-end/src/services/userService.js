@@ -17,16 +17,16 @@ const loginValidate = runSchema(Joi.object({
 }));
 
 const postLogin = async (email, password) => {
-    const getusers = await users.findOne({
-        where: {
-            email,
-            password,
-        },
-    });
-    return getusers;
+  const getusers = await users.findOne({
+    where: {
+      email,
+      password,
+    },
+  });
+  return getusers;
 };
 
 module.exports = { 
-    loginValidate,
-    postLogin,
+  loginValidate,
+  postLogin,
 };

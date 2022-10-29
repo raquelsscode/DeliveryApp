@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
 import Input from '../componentes/input';
 import Button from '../componentes/Button';
+import { singIn } from '../services/API';
 
 function LoginPage() {
-  const [state, setState] = useState({ email: '', password: '' });
-  // const [errorState, setErrorState] = useState(false);
-  const isFalse = true;
+  const [user, setUser] = useState({ email: '', password: '' });
+  const [loged, setLoged] = useState(false);
 
   const handleChange = ({ target: { name, value } }) => {
-    setState({ ...state, [name]: value });
+    setUser({ ...user, [name]: value });
+  };
+
+  const handleClick = async () => {
+    try {
+      await singIn(user);   
+    } catch (error) {
+      setLoged(true);
+    }
   };
 
   const emailIsValid = (email) => {
@@ -23,7 +31,7 @@ function LoginPage() {
   };
 
   const loginIsValid = () => {
-    const { email, password } = state;
+    const { email, password } = user;
     return emailIsValid(email) && passwordIsValid(password);
   };
 
@@ -35,7 +43,7 @@ function LoginPage() {
         name="email"
         dataTestId="common_login__input-email"
         type="email"
-        value={ state.email }
+        value={ user.email }
         onChange={ handleChange }
         placeholder="E-mail"
         label="Login"
@@ -45,26 +53,32 @@ function LoginPage() {
         name="password"
         dataTestId="common_login__input-password"
         type="password"
-        value={ state.password }
+        value={ user.password }
         onChange={ handleChange }
         placeholder="Senha"
         label="Senhas"
       />
-      <button
-        type="button"
-        textButton="Login"
-        data-testid="common_login__button-login"
-        disabled={ !loginIsValid() }
-      >
-        Login
-      </button>
+
+      <Button
+        textButton="Ainda não tenho conta"
+        dataTestId="common_login__button-login"
+        onClick={ handleClick }
+        isDisabled={ !loginIsValid() }
+      />
 
       <Button
         textButton="Ainda não tenho conta"
         dataTestId="common_login__button-register"
+        onClick={ handleClick }
       />
 
-      { isFalse ? <p>Not implemented</p> : '' }
+      { loged ? (
+        <p
+          data-testid="common_login__element-invalid-email"
+        >
+          Not implemented
+        </p>
+      ) : '' }
     </div>
   );
 }
