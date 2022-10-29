@@ -11,7 +11,7 @@ const postLogin = async (req, res, next) => {
     const product = await userService.postLogin(email, password);
 
     if (!product) {
-      return next({ name: 'NotFound', message: 'Invalid fields' });
+      return next({ name: 'NotFound', message: 'Not found' });
     }
     return res.status(200).json(product);
 };
