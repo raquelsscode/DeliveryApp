@@ -4,6 +4,8 @@ import Button from '../componentes/Button';
 
 function LoginPage() {
   const [state, setState] = useState({ email: '', password: '' });
+  // const [errorState, setErrorState] = useState(false);
+  const isFalse = true;
 
   const handleChange = ({ target: { name, value } }) => {
     setState({ ...state, [name]: value });
@@ -51,7 +53,7 @@ function LoginPage() {
       <button
         type="button"
         textButton="Login"
-        dataTestId="common_login__button-login"
+        data-testid="common_login__button-login"
         disabled={ !loginIsValid() }
       >
         Login
@@ -61,6 +63,8 @@ function LoginPage() {
         textButton="Ainda não tenho conta"
         dataTestId="common_login__button-register"
       />
+
+      { isFalse ? <p>Not implemented</p> : '' }
     </div>
   );
 }
