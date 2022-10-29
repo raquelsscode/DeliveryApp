@@ -1,7 +1,7 @@
 const Joi = require('joi');
+const md5 = require('md5');
 const { users } = require('../database/models');
 const runSchema = require('../utils/runSchema');
-const md5 = require('md5');
 
 const MESSAGE_ERROR_LOGIN = 'Some required fields are missing';
 

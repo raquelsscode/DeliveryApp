@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Input from '../componentes/input';
 import Button from '../componentes/Button';
 import singIn from '../services/API';
-import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
   const navigate = useNavigate();
