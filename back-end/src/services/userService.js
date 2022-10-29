@@ -1,6 +1,7 @@
 const Joi = require('joi');
 const { users } = require('../database/models');
 const runSchema = require('../utils/runSchema');
+const md5 = require('md5');
 
 const MESSAGE_ERROR_LOGIN = 'Some required fields are missing';
 
@@ -17,10 +18,12 @@ const loginValidate = runSchema(Joi.object({
 }));
 
 const postLogin = async (email, password) => {
+  const hashPassword = md5(password);
+  
   const getusers = await users.findOne({
     where: {
       email,
-      password,
+      password: hashPassword,
     },
   });
   return getusers;
