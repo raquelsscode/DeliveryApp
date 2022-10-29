@@ -1,28 +1,33 @@
 import React from 'react';
-import { string, func } from 'prop-types';
+import { string, bool } from 'prop-types';
 
 export default function Button(
   {
     textButton,
     dataTestId,
-    onClick,
-    // isDisabled,
+    // onClick,
+    isDisabled,
   },
 ) {
   return (
     <button
       data-testid={ dataTestId }
       type="button"
-      onClick={ onClick }
-      // disabled={ !loginIsValid() }
+      // onClick={ onClick }
+      disabled={ isDisabled }
     >
       { textButton }
     </button>
   );
 }
 
+Button.defaultProps = {
+  isDisabled: false,
+};
+
 Button.propTypes = {
   textButton: string.isRequired,
   dataTestId: string.isRequired,
-  onClick: func.isRequired,
+  // onClick: func.isRequired,
+  isDisabled: bool,
 };
