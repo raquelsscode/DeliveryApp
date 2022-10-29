@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import Input from '../componentes/input';
 import Button from '../componentes/Button';
 import singIn from '../services/API';
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
+  const navigate = useNavigate();
   const [user, setUser] = useState({ email: '', password: '' });
   const [loged, setLoged] = useState(false);
 
@@ -13,7 +15,8 @@ function LoginPage() {
 
   const handleClick = async () => {
     try {
-      await singIn(user);
+      const response = await singIn(user);
+      navigate(`/${response.role}/products`);
     } catch (error) {
       setLoged(true);
     }
