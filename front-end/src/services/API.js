@@ -9,6 +9,4 @@ async function singIn(obj) {
   return data;
 }
 
-export {
-  singIn,
-};
+export default singIn;

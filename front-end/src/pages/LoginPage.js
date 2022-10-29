@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Input from '../componentes/input';
 import Button from '../componentes/Button';
-import { singIn } from '../services/API';
+import singIn from '../services/API';
 
 function LoginPage() {
   const [user, setUser] = useState({ email: '', password: '' });
@@ -13,7 +13,7 @@ function LoginPage() {
 
   const handleClick = async () => {
     try {
-      await singIn(user);   
+      await singIn(user);
     } catch (error) {
       setLoged(true);
     }
