@@ -9,4 +9,10 @@ async function singIn(obj) {
   return data;
 }
 
-export default singIn;
+async function register(obj) {
+  const { data } = await API.post('/resgister', obj);
+  return data;
+}
+// c
+
+export default { singIn, register };
