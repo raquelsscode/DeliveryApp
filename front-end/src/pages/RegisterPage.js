@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Input from '../componentes/input';
 import Button from '../componentes/Button';
-import singIn from '../services/API';
+import register from '../services/API';
 
-function LoginPage() {
+function RegisterPage() {
   const navigate = useNavigate();
-  const [user, setUser] = useState({ email: '', password: '' });
+  const [user, setUser] = useState({ name: '', email: '', password: '' });
   const [loged, setLoged] = useState(false);
 
   const handleChange = ({ target: { name, value } }) => {
@@ -15,20 +15,21 @@ function LoginPage() {
 
   const handleClick = async () => {
     try {
-      const response = await singIn(user);
+      const response = await register(user);
       navigate(`/${response.role}/products`);
     } catch (error) {
       setLoged(true);
     }
   };
 
-  const redirect = () => {
-    navigate('/register');
+  const nameIsValid = (name) => {
+    const maxLength = 12;
+    return name.length > maxLength;
   };
 
   const emailIsValid = (email) => {
     // https://ui.dev/validate-email-address-javascript/
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const regex = /\S+@\S+\.\S+/;
     return regex.test(email);
   };
 
@@ -37,28 +38,38 @@ function LoginPage() {
     return password.length >= minLength;
   };
 
-  const loginIsValid = () => {
-    const { email, password } = user;
-    return emailIsValid(email) && passwordIsValid(password);
+  const registerIsValid = () => {
+    const { name, email, password } = user;
+    return nameIsValid(name) && emailIsValid(email) && passwordIsValid(password);
   };
 
   return (
     <div>
-      <h1>Página de Login</h1>
+      <h1>Cadastro</h1>
+
+      <Input
+        name="name"
+        dataTestId="common_register__input-name"
+        type="text"
+        value={ user.name }
+        onChange={ handleChange }
+        placeholder="Nome"
+        label="Nome"
+      />
 
       <Input
         name="email"
-        dataTestId="common_login__input-email"
+        dataTestId="common_register__input-email"
         type="email"
         value={ user.email }
         onChange={ handleChange }
         placeholder="E-mail"
-        label="Login"
+        label="E-mail"
       />
 
       <Input
         name="password"
-        dataTestId="common_login__input-password"
+        dataTestId="common_register__input-password"
         type="password"
         value={ user.password }
         onChange={ handleChange }
@@ -67,25 +78,20 @@ function LoginPage() {
       />
 
       <Button
-        textButton="Login"
-        dataTestId="common_login__button-login"
+        textButton="Cadastrar"
+        dataTestId="common_register__button-register"
         onClick={ handleClick }
-        isDisabled={ !loginIsValid() }
-      />
-      <Button
-        textButton="Ainda não tenho conta"
-        dataTestId="common_login__button-register"
-        onClick={ redirect }
+        isDisabled={ !registerIsValid() }
       />
       { loged ? (
         <p
-          data-testid="common_login__element-invalid-email"
+          data-testid="common_register__element-invalid_register"
         >
-          Not implemented
+          User Already Exist
         </p>
       ) : '' }
     </div>
   );
 }
 
-export default LoginPage;
+export default RegisterPage;
