@@ -28,7 +28,7 @@ function LoginPage() {
 
   const emailIsValid = (email) => {
     // https://ui.dev/validate-email-address-javascript/
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const regex = /\S+@\S+\.\S+/;
     return regex.test(email);
   };
 
