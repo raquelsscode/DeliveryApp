@@ -28,7 +28,7 @@ const registerValidate = runSchema(Joi.object({
     'string.base': MESSAGE_ERROR_LOGIN,
     'string.empty': MESSAGE_ERROR_LOGIN,
   }),
-  name: Joi.string().min(12).required()
+  name: Joi.string().min(12).required(),
 }));
 
 const postLogin = async (email, password) => {
@@ -44,27 +44,27 @@ const postLogin = async (email, password) => {
 };
 
 const postRegister = async (name, email, password) => {
-  const hashPassword = md5(password)
+  const hashPassword = md5(password);
 
   const getUser = await users.findOne({
     where: {
       email,
-      password: hashPassword
-    }
-  })
+      password: hashPassword,
+    },
+  });
   if (getUser) {
-    return null 
+    return null; 
   }
   
-  const createdUser = await users.create({name, email, password: hashPassword, role: 'customer'})
+  const createdUser = await users.create({ name, email, password: hashPassword, role: 'customer' });
 
-  const token = createToken(createdUser.email)
-  return { name, email, role: createdUser.role, token }
-}
+  const token = createToken(createdUser.email);
+  return { name, email, role: createdUser.role, token };
+};
 
 module.exports = { 
   loginValidate,
   postLogin,
   registerValidate,
-  postRegister
+  postRegister,
 };
