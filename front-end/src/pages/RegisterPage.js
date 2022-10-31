@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Input from '../componentes/input';
 import Button from '../componentes/Button';
-import register from '../services/API';
+import { register } from '../services/API';
 
 function RegisterPage() {
   const navigate = useNavigate();
