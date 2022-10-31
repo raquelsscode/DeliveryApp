@@ -8,7 +8,7 @@ const errors = {
 
 const errorHandler = ({ name, message }, _req, res, _next) => {
   const status = errors[name];
-  if (!status) return res.status(500).json({ message: 'Internal server error' });
+  if (!status) return res.status(500).json({ message });
   return res.status(status).json({ message });
 };
 
