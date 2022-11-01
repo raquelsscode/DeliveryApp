@@ -58,7 +58,7 @@ const postRegister = async (name, email, password) => {
   
   const createdUser = await users.create({ name, email, password: hashPassword, role: 'customer' });
 
-  const token = createToken({email: createdUser.email});
+  const token = createToken({ email: createdUser.email });
   return { name, email, role: createdUser.role, token };
 };
 
