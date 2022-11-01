@@ -16,29 +16,34 @@ const SalesModel = (sequelize, DataTypes) => {
       foreignKey: true,
       type: DataTypes.INTEGER,
     },
-    totalPrice: DataTypes.DECIMAL(9,2),
+    totalPrice: DataTypes.DECIMAL(9, 2),
     deliveryAddress: DataTypes.STRING,
     deliveryNumber: DataTypes.STRING,
     saleDate: DataTypes.DATE,
     status: DataTypes.STRING
-  }, 
-  {
-    timestamps: false,
-    tableName: 'sales',
-    undescored: false
-  });
+  },
+    {
+      timestamps: false,
+      tableName: 'sales',
+      undescored: false
+    });
 
   sales.associate = (models) => {
     models.sales.belongsTo(models.users,
-      { 
-        foreignKey: 'id',
-        as: 'usersId',
+      {
+        foreignKey: 'userId',
+        as: 'userId',
+      })
+    models.sales.belongsTo(models.users,
+      {
+        foreignKey: 'sellerId',
+        as: 'sellerId',
       })
   }
 
   sales.associate = (models) => {
     models.sales.hasMany(models.salesProducts,
-      { 
+      {
         foreignKey: 'saleId',
         as: 'saleId',
       })
