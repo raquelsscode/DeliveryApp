@@ -40,6 +40,10 @@ const postLogin = async (email, password) => {
       password: hashPassword,
     },
   });
+  
+  if (!getusers) {
+    return null;
+  }
   const token = createToken({ email: getusers.email });
   return { ...getusers.dataValues, token };
 };
