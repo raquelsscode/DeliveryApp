@@ -13,7 +13,7 @@ const postLogin = async (req, res, next) => {
     if (!product) {
       return next({ name: 'NotFound', message: 'Not found' });
     }
-    return res.status(200).json(product);
+    return res.status(200).json({ ...product });
 };
 
 const postRegister = async (req, res, next) => {

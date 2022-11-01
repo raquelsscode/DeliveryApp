@@ -40,7 +40,8 @@ const postLogin = async (email, password) => {
       password: hashPassword,
     },
   });
-  return getusers;
+  const token = createToken({ email: getusers.email });
+  return { ...getusers.dataValues, token };
 };
 
 const postRegister = async (name, email, password) => {

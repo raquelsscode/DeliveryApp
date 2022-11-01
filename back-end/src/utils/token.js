@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 require('dotenv/config');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'deliv3ry_4pP';
+const JWT_SECRET = process.env.JWT_SECRET || 'secret_key';
 const JWT_OPTIONS = {
   expiresIn: '7d', 
   algorithm: 'HS256', 
