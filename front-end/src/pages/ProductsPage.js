@@ -1,18 +1,20 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import Card from '../componentes/Card';
 import NavBar from '../componentes/NavBar';
 import { getProducts } from '../services/API';
 
 export default function ProductsPage() {
   const [user, setUser] = React.useState({});
   const [products, setProducts] = React.useState([]);
+  const [price, setPrice] = React.useState(0);
   const navigate = useNavigate();
 
   React.useEffect(async () => {
     setUser(JSON.parse(localStorage.getItem('user')));
 
     const response = await getProducts(user.token);
-    setProducts(response);
+    setProducts(response.map((product) => ({ ...product, quantity: 0 })));
   }, []);
 
   const productRedirect = () => {
@@ -21,6 +23,39 @@ export default function ProductsPage() {
 
   const ordersRedirect = () => {
     navigate('/orders');
+  };
+
+  const addProduct = (index) => {
+    const filterProduct = products.find((_item, i) => index === i );
+    filterProduct.quantity += 1;
+    setPrice((preve) => {
+      return (parseFloat(preve) + parseFloat(filterProduct.price)).toFixed(2);
+    });
+    // localStorage.setItem('car', JSON.stringify([]));
+  };
+
+  const rmProduct = (index) => {
+    const filterProduct = products[index];
+    filterProduct.quantity -= 1;
+    setPrice((preve) => {
+      return (parseFloat(preve) - parseFloat(filterProduct.price)).toFixed(2);
+    });
+    // localStorage.setItem('car', JSON.stringify([]));
+  };
+
+  const handleChange = ({ target: { value } }, index) => {
+    const filterProduct = products[index];
+    if (Boolean(value)) {
+      filterProduct.quantity = parseInt(value);
+      const newPrice = price + Number(filterProduct.quantity * parseFloat(filterProduct.price));
+      console.log(newPrice);
+      setPrice(newPrice.toFixed(2));
+    } else {
+      console.log(filterProduct.quantity);
+      const newPrice = price - (filterProduct.quantity * parseFloat(filterProduct.price))
+      filterProduct.quantity = 0;
+      setPrice(newPrice.toFixed(2));
+    }
   };
 
   return (
@@ -33,48 +68,22 @@ export default function ProductsPage() {
         nomeUsuario={ user.name }
       />
 
+      <button
+        type="button"
+        data-testid="customer_products__checkout-bottom-value"
+      >
+        {`Ver Carrinho: ${price}`}
+      </button>
+
       {
-        products.map((product) => (
-          <div
+        products.map((product, index) => (
+          <Card
             key={ product.id }
-          >
-            <p
-              data-testid={ `customer_products__element-card-title-${product.id}` }
-            >
-              { product.name }
-            </p>
-
-            <p
-              data-testid={ `customer_products__element-card-price-${product.id}` }
-            >
-              { product.price.replace(/\./, ',') }
-            </p>
-
-            <img
-              alt={ product.name }
-              data-testid={ `customer_products__img-card-bg-image-${product.id}` }
-              src={ product.urlImage }
-            />
-
-            <button
-              data-testid={ `customer_products__button-card-add-item-${product.id}` }
-              type="button"
-            >
-              add
-            </button>
-
-            <input
-              data-testid={ `customer_products__input-card-quantity-${product.id}` }
-              defaultValue="0"
-            />
-
-            <button
-              data-testid={ `customer_products__button-card-rm-item-${product.id}` }
-              type="button"
-            >
-              remover
-            </button>
-          </div>
+            product={ product }
+            addFunction={ () => addProduct(index) }
+            rmFunction={ () => rmProduct(index) }
+            onChange={ (event) => handleChange(event, index) }
+          />
         ))
       }
     </main>
