@@ -58,5 +58,5 @@ NavBar.propTypes = {
   button1Click: func.isRequired,
   textButton2: string.isRequired,
   button2Click: func.isRequired,
-  nomeUsuario: string.isRequired,
+  nomeUsuario: string,
 };
