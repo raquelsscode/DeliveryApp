@@ -7,7 +7,10 @@ import { register } from '../services/API';
 function RegisterPage() {
   const navigate = useNavigate();
   const [user, setUser] = useState({ name: '', email: '', password: '' });
-  const [loged, setLoged] = useState(false);
+  const [errorMessage, setErrorMessage] = useState({
+    logged: false,
+    message: '',
+  });
 
   const handleChange = ({ target: { name, value } }) => {
     setUser({ ...user, [name]: value });
@@ -18,7 +21,10 @@ function RegisterPage() {
       const response = await register(user);
       navigate(`/${response.role}/products`);
     } catch (error) {
-      setLoged(true);
+      setErrorMessage({
+        logged: true,
+        message: error.response.statusText,
+      });
     }
   };
 
@@ -83,13 +89,13 @@ function RegisterPage() {
         onClick={ handleClick }
         isDisabled={ !registerIsValid() }
       />
-      { loged ? (
-        <p
-          data-testid="common_register__element-invalid_register"
-        >
-          User Already Exist
-        </p>
-      ) : '' }
+
+      <p
+        hidden={ !errorMessage.logged }
+        data-testid="common_register__element-invalid_register"
+      >
+        { errorMessage.message }
+      </p>
     </div>
   );
 }

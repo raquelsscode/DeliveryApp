@@ -7,7 +7,10 @@ import { singIn } from '../services/API';
 function LoginPage() {
   const navigate = useNavigate();
   const [user, setUser] = useState({ email: '', password: '' });
-  const [loged, setLoged] = useState(false);
+  const [errorMessage, setErrorMessage] = useState({
+    logged: false,
+    message: '',
+  });
 
   const handleChange = ({ target: { name, value } }) => {
     setUser({ ...user, [name]: value });
@@ -16,9 +19,14 @@ function LoginPage() {
   const handleClick = async () => {
     try {
       const response = await singIn(user);
+      const { name, email, role, token } = response;
+      localStorage.setItem('user', JSON.stringify({ name, email, role, token }));
       navigate(`/${response.role}/products`);
     } catch (error) {
-      setLoged(true);
+      setErrorMessage({
+        logged: true,
+        message: error.response.statusText,
+      });
     }
   };
 
@@ -72,18 +80,19 @@ function LoginPage() {
         onClick={ handleClick }
         isDisabled={ !loginIsValid() }
       />
+      
       <Button
         textButton="Ainda não tenho conta"
         dataTestId="common_login__button-register"
         onClick={ redirect }
       />
-      { loged ? (
-        <p
-          data-testid="common_login__element-invalid-email"
-        >
-          Not implemented
-        </p>
-      ) : '' }
+
+      <p
+        hidden={ !errorMessage.logged }
+        data-testid="common_login__element-invalid-email"
+      >
+        { errorMessage.message }
+      </p>
     </div>
   );
 }

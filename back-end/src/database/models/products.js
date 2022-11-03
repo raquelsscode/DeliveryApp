@@ -11,10 +11,9 @@ const ProductsModel = (sequelize, DataTypes) => {
     urlImage: DataTypes.STRING
   },
   {
-    
-      timestamps: true,
-      tableName: 'products',
-      undescored: false
+    timestamps: false,
+    tableName: 'products',
+    underscored: true,
   }
   );
 
