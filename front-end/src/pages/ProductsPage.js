@@ -17,6 +17,9 @@ export default function ProductsPage() {
     setProducts(response.map((product) => ({ ...product, quantity: 0 })));
   }, []);
 
+  const sumProductsPrice = () => products
+    .reduce((acc, curr) => acc + (Number(curr.price) * curr.quantity), 0);
+
   const productRedirect = () => {
     navigate('/customer/products');
   };
@@ -26,35 +29,32 @@ export default function ProductsPage() {
   };
 
   const addProduct = (index) => {
-    const filterProduct = products.find((_item, i) => index === i );
+    const filterProduct = products.find((_item, i) => index === i);
     filterProduct.quantity += 1;
-    setPrice((preve) => {
-      return (parseFloat(preve) + parseFloat(filterProduct.price)).toFixed(2);
-    });
+    setPrice(sumProductsPrice().toFixed(2));
     // localStorage.setItem('car', JSON.stringify([]));
   };
 
   const rmProduct = (index) => {
     const filterProduct = products[index];
     filterProduct.quantity -= 1;
-    setPrice((preve) => {
-      return (parseFloat(preve) - parseFloat(filterProduct.price)).toFixed(2);
-    });
+    if (filterProduct.quantity < 0) {
+      filterProduct.quantity = 0;
+      setPrice(sumProductsPrice().toFixed(2));
+    } else {
+      setPrice(sumProductsPrice().toFixed(2));
+    }
     // localStorage.setItem('car', JSON.stringify([]));
   };
 
   const handleChange = ({ target: { value } }, index) => {
     const filterProduct = products[index];
-    if (Boolean(value)) {
-      filterProduct.quantity = parseInt(value);
-      const newPrice = price + Number(filterProduct.quantity * parseFloat(filterProduct.price));
-      console.log(newPrice);
-      setPrice(newPrice.toFixed(2));
+    if (value) {
+      filterProduct.quantity = parseInt(value, 10);
+      setPrice(sumProductsPrice().toFixed(2));
     } else {
-      console.log(filterProduct.quantity);
-      const newPrice = price - (filterProduct.quantity * parseFloat(filterProduct.price))
       filterProduct.quantity = 0;
-      setPrice(newPrice.toFixed(2));
+      setPrice(sumProductsPrice().toFixed(2));
     }
   };
 
@@ -70,9 +70,16 @@ export default function ProductsPage() {
 
       <button
         type="button"
-        data-testid="customer_products__checkout-bottom-value"
+        data-testid="customer_products__button-cart"
+        onClick={ () => navigate('/customer/checkout') }
+        disabled={ products.every(({ quantity }) => quantity <= 0) }
       >
-        {`Ver Carrinho: ${price}`}
+        Ver Carrinho:
+        <p
+          data-testid="customer_products__checkout-bottom-value"
+        >
+          {`${String(price).replace(/\./, ',')}`}
+        </p>
       </button>
 
       {
