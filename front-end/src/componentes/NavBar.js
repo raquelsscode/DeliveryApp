@@ -53,7 +53,6 @@ NavBar.defaultProps = {
   nomeUsuario: '',
 };
 
-
 NavBar.propTypes = {
   textButton1: string.isRequired,
   button1Click: func.isRequired,
