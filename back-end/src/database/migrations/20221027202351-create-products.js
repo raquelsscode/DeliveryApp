@@ -20,6 +20,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
         field: 'url_image',
+
       }
     });
   },

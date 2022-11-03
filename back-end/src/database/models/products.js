@@ -21,7 +21,7 @@ const ProductsModel = (sequelize, DataTypes) => {
     products.hasMany(models.salesProducts,
       { foreignKey: 'productId',
         as: 'product',
-     })
+      })
   }
 
   return products;
