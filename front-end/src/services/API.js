@@ -13,6 +13,14 @@ async function register(obj) {
   const { data } = await API.post('/register', obj);
   return data;
 }
-// c
 
-export { singIn, register };
+async function getProducts(token) {
+  const { data } = await API.get('/customer/products', {
+    headers: {
+      authorization: token,
+    },
+  });
+  return Object.values(data);
+}
+
+export { singIn, register, getProducts };
