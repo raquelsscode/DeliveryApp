@@ -92,6 +92,7 @@ function RegisterPage() {
 
       <p
         hidden={ !errorMessage.logged }
+        data-testid="common_register__element-invalid_register"
       >
         { errorMessage.message }
       </p>

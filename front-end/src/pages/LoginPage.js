@@ -88,6 +88,7 @@ function LoginPage() {
 
       <p
         hidden={ !errorMessage.logged }
+        data-testid="common_login__element-invalid-email"
       >
         { errorMessage.message }
       </p>
