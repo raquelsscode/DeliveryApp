@@ -7,7 +7,7 @@ const route = express.Router();
 
 route.post('/login', userController.postLogin);
 route.post('/register', userController.postRegister);
-route.get('/products', productsController.postProducts);
-route.post('/checkout', checkoutController.postCheckout);
+route.get('/customer/products', productsController.postProducts);
+route.post('/customer/checkout', checkoutController.postCheckout);
 
 module.exports = route;
