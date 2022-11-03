@@ -15,7 +15,7 @@ async function register(obj) {
 }
 
 async function getProducts(token) {
-  const { data } = await API.get('/products', {
+  const { data } = await API.get('/customer/products', {
     headers: {
       authorization: token,
     },
