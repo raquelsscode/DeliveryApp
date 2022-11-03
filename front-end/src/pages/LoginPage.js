@@ -80,6 +80,7 @@ function LoginPage() {
         onClick={ handleClick }
         isDisabled={ !loginIsValid() }
       />
+      
       <Button
         textButton="Ainda não tenho conta"
         dataTestId="common_login__button-register"
