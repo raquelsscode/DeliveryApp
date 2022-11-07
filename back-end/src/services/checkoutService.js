@@ -6,7 +6,7 @@ const sequelize = new Sequelize(config.development);
 
 const getAllSale = async () => {
     const getSale = await sales.findAll({
-        include: [{ model: products, as: 'product' }],
+        include: [{ model: products, as: 'products' }],
     });
 
     if (!getSale) return null;
@@ -15,10 +15,10 @@ const getAllSale = async () => {
 };
 
 const getSaleById = async (id) => {
-    const getSale = await sales.findOne(id, {
+    const getSale = await sales.findByPk(id, {
         include: [
-            { model: products, as: 'product' },
-            { model: users, as: 'sellerId' },
+            { model: products, as: 'products' },
+            { model: users, as: 'seller' },
         ],
     });
 

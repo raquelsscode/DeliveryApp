@@ -14,20 +14,12 @@ const UserModel = (sequelize, DataTypes) => {
     {
       timestamps: false,
       tableName: 'users',
-      undescored: false
+      underscored: false
     });
 
   users.associate = (models) => {
-    users.hasMany(models.sales,
-      {
-        foreignKey: 'userId',
-        as: 'userId',
-      })
-    users.hasMany(models.sales,
-      {
-        foreignKey: 'sellerId',
-        as: 'sellerId',
-      })
+    users.hasMany(models.sales, { foreignKey: 'userId', as: 'customer', })
+    users.hasMany(models.sales, { foreignKey: 'sellerId', as: 'seller', })
   }
 
   return users;
