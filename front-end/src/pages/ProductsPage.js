@@ -17,22 +17,21 @@ export default function ProductsPage() {
     setProducts(response.map((product) => ({ ...product, quantity: 0 })));
   }, []);
 
-  const sumProductsPrice = () => products
-    .reduce((acc, curr) => acc + (Number(curr.price) * curr.quantity), 0);
-
-  const productRedirect = () => {
-    navigate('/customer/products');
+  const sumProductsPrice = () => {
+    return products
+      .reduce((acc, curr) => acc + (Number(curr.price) * curr.quantity), 0);
   };
 
-  const ordersRedirect = () => {
-    navigate('/orders');
+  const setCart = () => {
+    const cart = products.filter(({ quantity }) => quantity > 0);
+    localStorage.setItem('cart', JSON.stringify(cart));
   };
 
   const addProduct = (index) => {
     const filterProduct = products.find((_item, i) => index === i);
     filterProduct.quantity += 1;
     setPrice(sumProductsPrice().toFixed(2));
-    // localStorage.setItem('car', JSON.stringify([]));
+    setCart();
   };
 
   const rmProduct = (index) => {
@@ -44,7 +43,7 @@ export default function ProductsPage() {
     } else {
       setPrice(sumProductsPrice().toFixed(2));
     }
-    // localStorage.setItem('car', JSON.stringify([]));
+    setCart();
   };
 
   const handleChange = ({ target: { value } }, index) => {
@@ -56,15 +55,16 @@ export default function ProductsPage() {
       filterProduct.quantity = 0;
       setPrice(sumProductsPrice().toFixed(2));
     }
+    setCart();
   };
 
   return (
     <main>
       <NavBar
         textButton1="Produtos"
-        button1Click={ productRedirect }
+        button1Click={ () =>  navigate('/customer/products') }
         textButton2="Pedidos"
-        button2Click={ ordersRedirect }
+        button2Click={ () => navigate('/orders') }
         nomeUsuario={ user.name }
       />
 
