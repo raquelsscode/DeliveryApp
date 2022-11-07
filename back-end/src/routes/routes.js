@@ -8,9 +8,14 @@ const route = express.Router();
 
 route.post('/login', userController.postLogin);
 route.post('/register', userController.postRegister);
+
 route.get('/customer/products', productsController.postProducts);
 route.get('/customer/orders', ordersController.getUser);
 route.post('/customer/checkout', checkoutController.postCheckout);
+
+route.get('/sales', checkoutController.getSales);
+route.get('/sales/:id', checkoutController.getSalesById);
+
 route.get('/sellers', userController.getSellers);
 
 module.exports = route;
