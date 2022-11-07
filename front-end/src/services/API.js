@@ -15,12 +15,30 @@ async function register(obj) {
 }
 
 async function getProducts(token) {
-  const { data } = await API.get('/products', {
+  const config = {
     headers: {
       authorization: token,
     },
-  });
+  };
+
+  const { data } = await API.get('/customer/products', config);
   return Object.values(data);
 }
 
-export { singIn, register, getProducts };
+async function getSellers() {
+  const { data } = await API.get('/sellers');
+  return data;
+}
+
+async function postOrder(token, obj) {
+  const config = {
+    headers: {
+      authorization: token,
+    },
+  };
+
+  const { data } = await API.post('/customer/checkout', obj, config);
+  return data;
+}
+
+export { singIn, register, getProducts, getSellers, postOrder };

@@ -30,7 +30,7 @@ function RegisterPage() {
 
   const nameIsValid = (name) => {
     const maxLength = 12;
-    return name.length > maxLength;
+    return name.length >= maxLength;
   };
 
   const emailIsValid = (email) => {

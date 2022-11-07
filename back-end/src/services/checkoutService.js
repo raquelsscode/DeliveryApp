@@ -1,5 +1,8 @@
 const Sequelize = require('sequelize');
 const { sales, salesProducts, users } = require('../database/models');
+const config = require('../database/config/config');
+
+const sequelize = new Sequelize(config.development);
 
 const postSaleProducts = async ({ products, saleId }, multTransactions) => {
     const createdAllProducts = [];
@@ -32,6 +35,8 @@ const postCheckoutSales = async (
             totalPrice,
             deliveryAddress,
             deliveryNumber,
+            saleDate: new Date(),
+            status: 'Pendente',
         }, { transaction: multTransactions },
     );
     return result;
@@ -42,7 +47,7 @@ const postCheckoutSales = async (
 const createSaleProducts = async ({ sellerId, totalPrice, deliveryAddress,
     deliveryNumber, products, email }) => {
     // First, we start a transaction from your connection and save it into a variable
-    const transaction = await Sequelize.transaction();
+    const transaction = await sequelize.transaction();
 
     try {
         // // Then, we do some calls passing this transaction as an option:

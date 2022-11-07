@@ -67,9 +67,19 @@ const postRegister = async (name, email, password) => {
   return { name, email, role: createdUser.role, token };
 };
 
+const getSellers = async () => {
+  const sellers = users.findAll({
+    where: {
+      role: 'seller',
+    },
+  });
+  return sellers;
+};
+
 module.exports = { 
   loginValidate,
   postLogin,
   registerValidate,
   postRegister,
+  getSellers,
 };
