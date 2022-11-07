@@ -32,4 +32,13 @@ const postRegister = async (req, res, next) => {
   return res.status(201).json({ ...createdRegister });
 };
 
-module.exports = { postLogin, postRegister };
+const getSellers = async (_req, res) => {
+  const sellers = await userService.getSellers();
+
+  if (!sellers) {
+    return next({ name: 'NotFound', message: 'Not found' });
+  }
+  return res.status(200).json(sellers);
+}; 
+
+module.exports = { postLogin, postRegister, getSellers };
