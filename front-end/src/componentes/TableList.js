@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import List from './List';
 
@@ -5,7 +6,6 @@ export default function TableList({
   cart,
   onClick,
 }) {
-
   return (
     <table>
       <thead>
@@ -33,3 +33,8 @@ export default function TableList({
     </table>
   );
 }
+
+TableList.propTypes = {
+  cart: PropTypes.arrayOf().isRequired,
+  onClick: PropTypes.func.isRequired,
+};

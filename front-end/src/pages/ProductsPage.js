@@ -10,17 +10,16 @@ export default function ProductsPage() {
   const [price, setPrice] = React.useState(0);
   const navigate = useNavigate();
 
-  React.useEffect(async () => {
+  React.useEffect(() => {
     setUser(JSON.parse(localStorage.getItem('user')));
 
-    const response = await getProducts(user.token);
-    setProducts(response.map((product) => ({ ...product, quantity: 0 })));
+    getProducts(user.token).then((response) => {
+      setProducts(response.map((product) => ({ ...product, quantity: 0 })));
+    });
   }, []);
 
-  const sumProductsPrice = () => {
-    return products
-      .reduce((acc, curr) => acc + (Number(curr.price) * curr.quantity), 0);
-  };
+  const sumProductsPrice = () => products
+    .reduce((acc, curr) => acc + (Number(curr.price) * curr.quantity), 0);
 
   const setCart = () => {
     const cart = products.filter(({ quantity }) => quantity > 0);
@@ -62,7 +61,7 @@ export default function ProductsPage() {
     <main>
       <NavBar
         textButton1="Produtos"
-        button1Click={ () =>  navigate('/customer/products') }
+        button1Click={ () => navigate('/customer/products') }
         textButton2="Pedidos"
         button2Click={ () => navigate('/orders') }
         nomeUsuario={ user.name }

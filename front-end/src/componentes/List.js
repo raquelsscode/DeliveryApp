@@ -26,7 +26,7 @@ export default function List({
       <td data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }>
         { (product.price * product.quantity).toFixed(2).replace(/\./, ',') }
       </td>
-      
+
       <td>
         <Button
           dataTestId={ `customer_checkout__element-order-table-remove-${index}` }
@@ -47,4 +47,5 @@ List.propTypes = {
     urlImage: PropTypes.string.isRequired,
   }).isRequired,
   index: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
 };

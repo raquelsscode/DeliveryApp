@@ -71,10 +71,10 @@ const getSellers = async () => {
   const sellers = users.findAll({
     where: {
       role: 'seller',
-    }
+    },
   });
   return sellers;
-}
+};
 
 module.exports = { 
   loginValidate,

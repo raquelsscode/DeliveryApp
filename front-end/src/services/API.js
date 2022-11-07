@@ -20,7 +20,7 @@ async function getProducts(token) {
       authorization: token,
     },
   };
-  
+
   const { data } = await API.get('/customer/products', config);
   return Object.values(data);
 }

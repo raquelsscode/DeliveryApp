@@ -32,7 +32,7 @@ const postRegister = async (req, res, next) => {
   return res.status(201).json({ ...createdRegister });
 };
 
-const getSellers = async (_req, res) => {
+const getSellers = async (_req, res, next) => {
   const sellers = await userService.getSellers();
 
   if (!sellers) {

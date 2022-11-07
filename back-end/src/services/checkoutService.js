@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const { sales, salesProducts, users } = require('../database/models');
 const config = require('../database/config/config');
 
-const sequelize = new Sequelize(config['development']);
+const sequelize = new Sequelize(config.development);
 
 const postSaleProducts = async ({ products, saleId }, multTransactions) => {
     const createdAllProducts = [];
