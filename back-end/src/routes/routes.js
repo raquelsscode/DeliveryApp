@@ -3,6 +3,7 @@ const userController = require('../controllers/userController');
 const productsController = require('../controllers/productsController');
 const checkoutController = require('../controllers/checkoutController');
 const ordersController = require('../controllers/ordersController');
+const sellerController = require('../controllers/sellerController');
 
 const route = express.Router();
 
@@ -17,5 +18,6 @@ route.get('/sales', checkoutController.getSales);
 route.get('/sales/:id', checkoutController.getSalesById);
 
 route.get('/sellers', userController.getSellers);
+route.get('/seller/orders', sellerController.getProducts);
 
 module.exports = route;
