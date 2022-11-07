@@ -8,6 +8,15 @@ const getProducts = async () => {
   return getTenProducts;
 };
 
+const getProductById = async (id) => {
+  const getProduct = await sales.findOne({
+    where: { id },
+  });
+  if (!getProduct) return null;
+  return getProduct;
+};
+
 module.exports = {
   getProducts,
+  getProductById,
 };
