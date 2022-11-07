@@ -9,5 +9,6 @@ route.post('/login', userController.postLogin);
 route.post('/register', userController.postRegister);
 route.get('/customer/products', productsController.postProducts);
 route.post('/customer/checkout', checkoutController.postCheckout);
+route.get('/sellers', userController.getSellers);
 
 module.exports = route;
