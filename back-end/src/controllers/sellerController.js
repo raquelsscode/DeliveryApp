@@ -21,7 +21,20 @@ const getProductById = async (req, res, next) => {
   return res.status(200).json(getProduct);
 };
 
+const saleUpdated = async (req, res, next) => {
+  const { id } = req.params;
+  const { status } = req.body;
+  const updatedSale = await sellerService.updateSale(id, status);
+
+  if (!updatedSale) {
+    return next({ name: 'NotFound', message: 'Not found' });
+  }
+
+  return res.status(200).json(updatedSale);
+};
+
 module.exports = {
   getProducts,
   getProductById,
+  saleUpdated,
 };

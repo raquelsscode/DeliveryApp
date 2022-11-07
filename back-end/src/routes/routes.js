@@ -20,5 +20,6 @@ route.get('/sales/:id', checkoutController.getSalesById);
 route.get('/sellers', userController.getSellers);
 route.get('/seller/orders', sellerController.getProducts);
 route.get('/seller/orders/:id', sellerController.getProductById);
+route.patch('/seller/orders/:id', sellerController.saleUpdated);
 
 module.exports = route;
