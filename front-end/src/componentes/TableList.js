@@ -1,6 +1,11 @@
+import React from 'react';
 import List from './List';
 
-export default function TableList() {
+export default function TableList({
+  cart,
+  onClick,
+}) {
+
   return (
     <table>
       <thead>
@@ -14,13 +19,16 @@ export default function TableList() {
         </tr>
       </thead>
       <tbody>
-        {products.map((order, index) => (
-          <List
-            order={ order }
-            key={ order.id }
-            index={ index }
-          />
-        ))}
+        {
+          cart.map((product, index) => (
+            <List
+              key={ product.id }
+              product={ product }
+              index={ index }
+              onClick={ onClick }
+            />
+          ))
+        }
       </tbody>
     </table>
   );
