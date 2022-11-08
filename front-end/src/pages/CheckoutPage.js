@@ -60,7 +60,7 @@ export default function CheckoutPage() {
         textButton1="Produtos"
         button1Click={ () => navigate('/customer/products') }
         textButton2="Meus Pedidos"
-        button2Click={ () => navigate('/customer/checkout') }
+        button2Click={ () => navigate('/customer/orders') }
         nomeUsuario={ user.name }
       />
       <section>
