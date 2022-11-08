@@ -45,6 +45,11 @@ export default function Table({
   );
 }
 
+Table.defaultProps = {
+  order: {},
+  onClick: () => console.log(),
+};
+
 Table.propTypes = {
   page: PropTypes.string.isRequired,
   order: PropTypes.shape(),
