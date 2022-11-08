@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import NavBar from '../componentes/NavBar';
-import Table from '../componentes/Table'
+import Table from '../componentes/Table';
 import { getOrder } from '../services/API';
 
 export default function OrderDetailsPage() {
@@ -10,21 +10,19 @@ export default function OrderDetailsPage() {
     products: [],
     seller: {
       name: '',
-    }
+    },
   });
   const navigate = useNavigate();
   const params = useParams();
   const totalPrice = order.products
-    .reduce((acc, curr) => acc + (Number(curr.price) * curr.salesProducts.quantity), 0).toFixed(2);
-
-
+    .reduce((acc, curr) => acc + (Number(curr.price) * curr.salesProducts.quantity), 0)
+    .toFixed(2);
 
   React.useEffect(() => {
     setUser(JSON.parse(localStorage.getItem('user')));
     getOrder(params.id).then((response) => {
       setOrder(response);
     });
-
   }, []);
 
   console.log(order);

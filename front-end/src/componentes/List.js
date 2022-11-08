@@ -19,7 +19,7 @@ export default function List({
 
       <td data-testid={ `customer_${page}__element-order-table-quantity-${index}` }>
         {
-          hasButton ? product.quantity : product.salesProducts.quantity 
+          hasButton ? product.quantity : product.salesProducts.quantity
         }
       </td>
 
@@ -29,8 +29,9 @@ export default function List({
 
       <td data-testid={ `customer_${page}__element-order-table-sub-total-${index}` }>
         {
-          hasButton ?  (product.price * product.quantity).toFixed(2).replace(/\./, ',') :
-          (product.price * product.salesProducts.quantity).toFixed(2).replace(/\./, ',') 
+          hasButton ? (product.price * product.quantity).toFixed(2).replace(/\./, ',')
+            : (product.price * product.salesProducts.quantity)
+              .toFixed(2).replace(/\./, ',')
         }
       </td>
 
@@ -62,6 +63,9 @@ List.propTypes = {
     id: PropTypes.number.isRequired,
     price: PropTypes.string.isRequired,
     urlImage: PropTypes.string.isRequired,
+    salesProducts: PropTypes.shape({
+      quantity: PropTypes.number.isRequired,
+    }).isRequired,
   }).isRequired,
   index: PropTypes.number.isRequired,
   hasButton: PropTypes.bool.isRequired,
