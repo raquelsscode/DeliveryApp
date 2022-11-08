@@ -12,6 +12,12 @@ function LoginPage() {
     message: '',
   });
 
+  React.useEffect(() => {
+    if (JSON.parse(localStorage.getItem('user'))) {
+      navigate('/customer/products');
+    }
+  });
+
   const handleChange = ({ target: { name, value } }) => {
     setUser({ ...user, [name]: value });
   };
@@ -28,10 +34,6 @@ function LoginPage() {
         message: error.response.statusText,
       });
     }
-  };
-
-  const redirect = () => {
-    navigate('/register');
   };
 
   const emailIsValid = (email) => {
@@ -84,7 +86,7 @@ function LoginPage() {
       <Button
         textButton="Ainda não tenho conta"
         dataTestId="common_login__button-register"
-        onClick={ redirect }
+        onClick={ () => navigate('/register') }
       />
 
       <p
