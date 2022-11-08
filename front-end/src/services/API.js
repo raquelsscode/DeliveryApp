@@ -41,4 +41,10 @@ async function postOrder(token, obj) {
   return data;
 }
 
-export { singIn, register, getProducts, getSellers, postOrder };
+async function getOrder(id) {
+  const { data } = await API.get(`/sales/${id}`);
+
+  return data;
+}
+
+export { singIn, register, getProducts, getSellers, postOrder, getOrder };

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../componentes/NavBar';
-import TableList from '../componentes/TableList';
-import Input from '../componentes/input';
+import Table from '../componentes/Table';
+import Input from '../componentes/Input';
 import { getSellers, postOrder } from '../services/API';
 import Button from '../componentes/Button';
 
@@ -32,7 +32,6 @@ export default function CheckoutPage() {
     const newCart = cart.filter(({ id }) => id !== ID);
     localStorage.setItem('cart', JSON.stringify(newCart));
     setCart(newCart);
-    console.log(sellers);
   };
 
   const handleChange = ({ target: { name, value } }) => {
@@ -65,8 +64,10 @@ export default function CheckoutPage() {
         nomeUsuario={ user.name }
       />
       <section>
-        <TableList
-          cart={ cart }
+        <Table
+          page="checkout"
+          dataArray={ cart }
+          hasButton
           onClick={ rmCart }
         />
       </section>
@@ -90,7 +91,6 @@ export default function CheckoutPage() {
           {
             sellers.map((seller, index) => (
               <option
-                selected={ index === 0 ? 'selected' : '' }
                 key={ seller.id }
                 value={ index }
               >
