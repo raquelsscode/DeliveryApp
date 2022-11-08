@@ -4,7 +4,7 @@ import './App.css';
 import RegisterPage from './pages/RegisterPage';
 import ProductsPage from './pages/ProductsPage';
 import CheckoutPage from './pages/CheckoutPage';
-import SaleDetails from './pages/SaleDetails';
+import OrderDetailsPage from './pages/OrderDetailsPage';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
       <Route path="/register" element={ <RegisterPage /> } />
       <Route path="/customer/products" element={ <ProductsPage /> } />
       <Route path="/customer/checkout" element={ <CheckoutPage /> } />
-      <Route path="/customer/orders/:id" element={ <SaleDetails /> } />
+      <Route path="/customer/orders/:id" element={ <OrderDetailsPage /> } />
     </Routes>
   );
 }
