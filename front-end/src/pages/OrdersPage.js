@@ -1,6 +1,6 @@
 import moment from 'moment';
 import React from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import NavBar from '../componentes/NavBar';
 import { getOrders } from '../services/API';
 
@@ -31,25 +31,25 @@ export default function OrdersPage() {
       <section>
         {
           orders.map((order, index) => (
-            <Link to={`/customer/orders/${order.id}`} key={index}>
-              <div style={{ border: "1px solid black" }} >
+            <Link to={ `/customer/orders/${order.id}` } key={ index }>
+              <div style={ { border: '1px solid black' } }>
                 <p
-                  data-testid={`customer_orders__element-order-id-${order.id}`}
+                  data-testid={ `customer_orders__element-order-id-${order.id}` }
                 >
                   {`Pedido ${order.id}`}
                 </p>
                 <span
-                  data-testid={`customer_orders__element-delivery-status-${order.id}`}
+                  data-testid={ `customer_orders__element-delivery-status-${order.id}` }
                 >
                   {order.status}
                 </span>
                 <p
-                  data-testid={`customer_orders__element-order-date-${order.id}`}
+                  data-testid={ `customer_orders__element-order-date-${order.id}` }
                 >
                   {moment(order.saleDate).utc().format('DD/MM/YYYY') }
                 </p>
                 <p
-                  data-testid={`customer_orders__element-card-price-${order.id}`}
+                  data-testid={ `customer_orders__element-card-price-${order.id}` }
                 >
                   {order.totalPrice.replace(/\./, ',')}
                 </p>
