@@ -41,10 +41,10 @@ async function postOrder(token, obj) {
   return data;
 }
 
-async function getsales() {
-  const { data } = await API.get('/orders');
+async function getOrder(id) {
+  const { data } = await API.get(`/sales/${id}`);
 
   return data;
 }
 
-export { singIn, register, getProducts, getSellers, postOrder, getsales };
+export { singIn, register, getProducts, getSellers, postOrder, getOrder };
