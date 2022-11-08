@@ -76,10 +76,24 @@ const getSellers = async () => {
   return sellers;
 };
 
+const getUserById = async (email) => {
+  const getUser = await users.findOne({
+    where: {
+      email,
+    },
+  });
+
+  if (!getUser) {
+    return null;
+  }
+  return getUser.id;
+};
+
 module.exports = { 
   loginValidate,
   postLogin,
   registerValidate,
   postRegister,
   getSellers,
+  getUserById,
 };
