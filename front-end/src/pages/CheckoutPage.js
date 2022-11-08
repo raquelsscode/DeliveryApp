@@ -65,9 +65,9 @@ export default function CheckoutPage() {
       />
       <section>
         <Table
-          page='checkout'
+          page="checkout"
           dataArray={ cart }
-          hasButton={ true }
+          hasButton
           onClick={ rmCart }
         />
       </section>
