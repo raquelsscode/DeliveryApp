@@ -1,0 +1,117 @@
+* {
+    font-family: Roboto, 'sans-serif';
+}
+
+/* body {
+    background-color: #F7CC3B !important;
+} */
+
+.logo {
+width: 159px;
+height: 132px;
+}
+
+.logo img {
+    width: 140px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title {
+    margin-top: 5px;
+}
+
+.login-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: #EAF1EF; */
+    width: 321px;
+    height: 314px;
+    margin: auto;
+    /* box-shadow: 1px 3px 5px 2px rgba(50, 50, 50, 0.49); */
+    padding-top: 30px;
+}
+
+.container {
+    margin-top: 45px;
+}
+
+.login-container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 27em;
+}
+
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    width: 253px;
+    margin-right: 28px;
+}
+
+.input {
+    padding: 15px;
+    width: 100%;
+    margin-bottom: 20px;
+    border: 1px solid #F7CC3B;
+    border-radius: 3px;
+}
+
+.input:focus {
+border-color: #C84168;
+}
+
+input:first-child {
+    margin-top: 30px;
+}
+
+.button {
+    padding: 8px;
+    display: flex;
+}
+
+.button-login {
+    width: 284px;
+    height: 90px;
+    margin-left: 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.button:first-child {
+    color: white;
+    background-color: #C84168;
+    border: 1px solid #C84168;
+    border-radius: 5px;
+    width: 100%;
+    justify-content: center;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.button:nth-child(2) {
+    background-color: #F7CC3B;
+    color: #C84168;
+    border: 1px solid #C84168;
+    border-radius: 5px;
+    width: 100%;
+    justify-content: center;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.error-message {
+    margin-left: 55px;
+    color: red;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
